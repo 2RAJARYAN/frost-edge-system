@@ -1,0 +1,26 @@
+[project]
+name = "frost-edge-system"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "PushkarOM", email = "pushkarchaturvedi42@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "flask>=3.1.3",
+    "pandas>=3.0.5",
+    "pyyaml>=6.0.3",
+    "requests>=2.34.2",
+]
+
+[project.scripts]
+frost-edge-system = "frost_edge_system:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
