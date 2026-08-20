@@ -1,0 +1,27 @@
+# Copy this file to config.yaml and fill in real values.
+# config.yaml is gitignored -- never commit real API keys.
+
+sensor_backend: mock   # "mock" or "real" -- config/loader.py validates this,
+                        # poller.py uses it to decide which SensorReader to instantiate
+
+poll_interval_seconds: 60
+
+storage:
+  db_path: "frost_edge.db"
+
+mock:
+  csv_path: null        # e.g. "data/sample_readings.csv" -- null means synthetic fallback
+  loop: true
+
+alerts:
+  cooldown_minutes: 30
+  risk_threshold: 0.6
+
+telegram:
+  bot_token: "REPLACE_ME"
+  chat_id: "REPLACE_ME"
+
+sms:
+  api_key: "REPLACE_ME"
+  api_url: "REPLACE_ME"
+  to_number: "REPLACE_ME"
