@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frost Edge — Node 01</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <div class="eyebrow">Frost Edge // Node 01</div>
+        <h1 style="margin:0.25rem 0 0;font-size:1.1rem;font-weight:600;">Cold-Injury Risk Monitor</h1>
+      </div>
+      <div class="status">
+        <span class="status-dot"></span>
+        <span>Updated <span id="last-updated">—</span></span>
+      </div>
+    </header>
+
+    <div class="hero card">
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 200 120" width="220" role="img" aria-label="Frost risk gauge">
+          <path d="M20,100 A80,80 0 0 1 180,100" fill="none" stroke="#1A2733" stroke-width="14" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#4FA8D8"/>
+              <stop offset="55%" stop-color="#E8A33D"/>
+              <stop offset="100%" stop-color="#E8604C"/>
+            </linearGradient>
+          </defs>
+          <path d="M20,100 A80,80 0 0 1 180,100" fill="none" stroke="url(#gaugeGradient)" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+          <line id="needle" x1="100" y1="100" x2="100" y2="30" stroke="#E7EEF3" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="100" cy="100" r="5" fill="#E7EEF3"/>
+        </svg>
+      </div>
+      <div class="risk-readout">
+        <div class="risk-number" id="risk-number">—</div>
+        <div class="risk-zone" id="risk-zone">NO MODEL YET</div>
+        <div class="risk-caption" id="risk-caption">Inference not connected</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Current Readings</h2>
+      <div class="readings" id="readings">
+        <div class="empty-state">Loading…</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Temperature — Last 100 Readings</h2>
+      <div class="card">
+        <canvas id="chart" height="90"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

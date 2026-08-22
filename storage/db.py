@@ -65,3 +65,34 @@ def latest_readings(db_path: str | Path = DEFAULT_DB_PATH) -> dict:
             """
         ).fetchall()
     return {key: value for key, value in rows}
+
+
+def readings_history(key: str, limit: int = 100, db_path: str | Path = DEFAULT_DB_PATH) -> list[tuple]:
+    """Most recent `limit` readings for one sensor key, oldest first --
+    what the dashboard's history chart plots left-to-right."""
+    with get_connection(db_path) as conn:
+        rows = conn.execute(
+            "SELECT ts, value FROM readings WHERE key = ? ORDER BY ts DESC LIMIT ?",
+            (key, limit),
+        ).fetchall()
+    return list(reversed(rows))
+
+
+def latest_prediction(db_path: str | Path = DEFAULT_DB_PATH) -> dict | None:
+    """Most recent row from predictions, or None -- inference/ doesn't
+    exist yet, so the dashboard has to handle "no prediction" as a
+    normal state, not an error."""
+    with get_connection(db_path) as conn:
+        row = conn.execute(
+            "SELECT ts, predicted_min_temp_c, risk_score, model_version "
+            "FROM predictions ORDER BY ts DESC LIMIT 1"
+        ).fetchone()
+    if row is None:
+        return None
+    ts, predicted_min_temp_c, risk_score, model_version = row
+    return {
+        "ts": ts,
+        "predicted_min_temp_c": predicted_min_temp_c,
+        "risk_score": risk_score,
+        "model_version": model_version,
+    }
