@@ -25,3 +25,9 @@ sms:
   api_key: "REPLACE_ME"
   api_url: "REPLACE_ME"
   to_number: "REPLACE_ME"
+
+alerts:
+  cooldown_minutes: 30
+  risk_threshold: 0.6
+  hysteresis_margin: 0.1
+  channels: [console]
