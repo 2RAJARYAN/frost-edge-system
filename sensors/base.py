@@ -9,6 +9,7 @@ class SensorReadError(Exception):
     get silently logged as a 0.0 or None that flows straight into the
     model as if it were real data.
     """
+
     pass
 
 
@@ -42,6 +43,7 @@ class AlertSendError(Exception):
     same fault-isolation instinct as the four-service architecture,
     one level down.
     """
+
     pass
 
 

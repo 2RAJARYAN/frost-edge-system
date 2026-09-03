@@ -9,6 +9,7 @@ class AlertSendError(Exception):
     same fault-isolation instinct as the four-service architecture,
     one level down.
     """
+
     pass
 
 

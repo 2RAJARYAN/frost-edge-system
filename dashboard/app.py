@@ -19,10 +19,12 @@ def create_app(config: dict | None = None) -> Flask:
     @app.route("/api/latest")
     def api_latest():
         db_path = app.config["DB_PATH"]
-        return jsonify({
-            "readings": latest_readings(db_path),
-            "prediction": latest_prediction(db_path),
-        })
+        return jsonify(
+            {
+                "readings": latest_readings(db_path),
+                "prediction": latest_prediction(db_path),
+            }
+        )
 
     @app.route("/api/history/<key>")
     def api_history(key):

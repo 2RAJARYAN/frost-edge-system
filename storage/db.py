@@ -30,7 +30,9 @@ def init_db(db_path: str | Path = DEFAULT_DB_PATH):
         conn.executescript(schema_path.read_text())
 
 
-def insert_reading(ts: str, key: str, value: float, db_path: str | Path = DEFAULT_DB_PATH):
+def insert_reading(
+    ts: str, key: str, value: float, db_path: str | Path = DEFAULT_DB_PATH
+):
     with get_connection(db_path) as conn:
         conn.execute(
             "INSERT INTO readings (ts, key, value) VALUES (?, ?, ?)",
@@ -67,7 +69,9 @@ def latest_readings(db_path: str | Path = DEFAULT_DB_PATH) -> dict:
     return {key: value for key, value in rows}
 
 
-def readings_history(key: str, limit: int = 100, db_path: str | Path = DEFAULT_DB_PATH) -> list[tuple]:
+def readings_history(
+    key: str, limit: int = 100, db_path: str | Path = DEFAULT_DB_PATH
+) -> list[tuple]:
     """Most recent `limit` readings for one sensor key, oldest first --
     what the dashboard's history chart plots left-to-right."""
     with get_connection(db_path) as conn:
@@ -99,8 +103,12 @@ def latest_prediction(db_path: str | Path = DEFAULT_DB_PATH) -> dict | None:
 
 
 def insert_alert_sent(
-    ts: str, channel: str, risk_score: float, message: str,
-    status: str = "sent", db_path: str | Path = DEFAULT_DB_PATH,
+    ts: str,
+    channel: str,
+    risk_score: float,
+    message: str,
+    status: str = "sent",
+    db_path: str | Path = DEFAULT_DB_PATH,
 ):
     with get_connection(db_path) as conn:
         conn.execute(

@@ -31,11 +31,7 @@ def test_empty_csv_raises(tmp_path):
 
 def test_csv_replay_reads_rows_in_order(tmp_path):
     csv_file = tmp_path / "sample.csv"
-    csv_file.write_text(
-        "temperature_c,humidity_pct\n"
-        "1.5,80.0\n"
-        "2.5,78.0\n"
-    )
+    csv_file.write_text("temperature_c,humidity_pct\n1.5,80.0\n2.5,78.0\n")
     reader = MockSensorReader(csv_path=str(csv_file), loop=False)
     assert reader.read() == {"temperature_c": 1.5, "humidity_pct": 80.0}
     assert reader.read() == {"temperature_c": 2.5, "humidity_pct": 78.0}

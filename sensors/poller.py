@@ -55,7 +55,9 @@ def run(config_path: str | None = None):
 
     logger.info(
         "frost-sensors starting: backend=%s interval=%ss db=%s",
-        config["sensor_backend"], interval, db_path,
+        config["sensor_backend"],
+        interval,
+        db_path,
     )
 
     while True:

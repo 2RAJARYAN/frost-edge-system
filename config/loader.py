@@ -9,6 +9,7 @@ VALID_SENSOR_BACKENDS = ("mock", "real")
 class ConfigError(Exception):
     """Raised on missing or malformed config -- meant to fail loudly
     at startup, not deep inside a running service."""
+
     pass
 
 
