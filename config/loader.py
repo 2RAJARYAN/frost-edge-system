@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import yaml
 
 DEFAULT_CONFIG_PATH = Path(__file__).parent / "config.yaml"
@@ -9,8 +10,6 @@ VALID_SENSOR_BACKENDS = ("mock", "real")
 class ConfigError(Exception):
     """Raised on missing or malformed config -- meant to fail loudly
     at startup, not deep inside a running service."""
-
-    pass
 
 
 def load_config(path: str | Path = DEFAULT_CONFIG_PATH) -> dict:

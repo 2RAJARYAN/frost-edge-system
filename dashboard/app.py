@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template
 
 from config.loader import load_config
-from storage.db import latest_readings, readings_history, latest_prediction
+from storage.db import latest_prediction, latest_readings, readings_history
 
 
 def create_app(config: dict | None = None) -> Flask:

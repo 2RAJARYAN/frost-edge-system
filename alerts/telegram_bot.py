@@ -22,7 +22,7 @@ Until implemented, keep config.yaml's alerts.channels as [console]
 so nothing downstream breaks.
 """
 
-from alerts.base import AlertChannel, AlertSendError
+from alerts.base import AlertChannel
 
 
 class TelegramAlertChannel(AlertChannel):

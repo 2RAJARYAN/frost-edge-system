@@ -1,6 +1,6 @@
 import logging
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from alerts.alert_policy import AlertPolicy
 from alerts.base import AlertChannel
@@ -66,7 +66,7 @@ def evaluate_and_dispatch(
         return decision
 
     message = _build_message(prediction, decision)
-    ts = datetime.now(timezone.utc).isoformat()
+    ts = datetime.now(UTC).isoformat()
 
     for name, channel in channels.items():
         # Broad except is deliberate here, not sloppy -- this loop IS
@@ -78,7 +78,9 @@ def evaluate_and_dispatch(
         try:
             channel.send(message)
             status = "sent"
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 -- intentional: isolates one
+            # broken/failing channel so it can't block others or crash
+            # the whole alerts service. See dispatcher module design notes.
             logger.warning("Channel '%s' failed: %s: %s", name, type(e).__name__, e)
             status = "failed"
         insert_alert_sent(ts, name, prediction["risk_score"], message, status, db_path)

@@ -15,7 +15,7 @@ Inbound/"answering" SMS is explicitly Phase 4+ stretch goal per the
 brief -- don't build it into this class.
 """
 
-from alerts.base import AlertChannel, AlertSendError
+from alerts.base import AlertChannel
 
 
 class SmsAlertChannel(AlertChannel):

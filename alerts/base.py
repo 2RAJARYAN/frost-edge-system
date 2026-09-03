@@ -10,8 +10,6 @@ class AlertSendError(Exception):
     one level down.
     """
 
-    pass
-
 
 class AlertChannel(ABC):
     """The contract every notification channel -- console, Telegram,

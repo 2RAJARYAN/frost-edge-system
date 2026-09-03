@@ -1,4 +1,5 @@
 import pytest
+
 from sensors.base import SensorReader, SensorReadError
 from sensors.mock_sensor import MockSensorReader
 

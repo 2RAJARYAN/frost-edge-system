@@ -10,8 +10,6 @@ class SensorReadError(Exception):
     model as if it were real data.
     """
 
-    pass
-
 
 class SensorReader(ABC):
     """The one contract every sensor driver, real or mock, must satisfy."""
@@ -43,8 +41,6 @@ class AlertSendError(Exception):
     same fault-isolation instinct as the four-service architecture,
     one level down.
     """
-
-    pass
 
 
 class AlertChannel(ABC):

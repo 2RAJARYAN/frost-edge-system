@@ -1,9 +1,9 @@
 import logging
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from config.loader import load_config
-from sensors.base import SensorReadError, SensorReader
+from sensors.base import SensorReader, SensorReadError
 from sensors.mock_sensor import MockSensorReader
 from storage.db import init_db, insert_readings_batch
 
@@ -39,7 +39,7 @@ def poll_once(reader: SensorReader, db_path: str) -> dict | None:
         logger.warning("Sensor read failed, skipping this tick: %s", e)
         return None
 
-    ts = datetime.now(timezone.utc).isoformat()
+    ts = datetime.now(UTC).isoformat()
     insert_readings_batch(ts, reading, db_path=db_path)
     logger.info("Wrote reading at %s: %s", ts, reading)
     return reading

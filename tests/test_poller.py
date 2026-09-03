@@ -1,6 +1,7 @@
 import pytest
-from sensors.poller import build_reader, poll_once
+
 from sensors.mock_sensor import MockSensorReader
+from sensors.poller import build_reader, poll_once
 from storage.db import init_db, latest_readings
 
 
