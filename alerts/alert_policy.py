@@ -61,9 +61,7 @@ class AlertPolicy:
         elapsed = now - self._last_alert_time
         if elapsed >= self.cooldown_seconds:
             self._last_alert_time = now
-            return AlertDecision(
-                True, "reminder: still above threshold, cooldown elapsed"
-            )
+            return AlertDecision(True, "reminder: still above threshold, cooldown elapsed")
 
         return AlertDecision(
             False, f"cooldown active ({elapsed:.0f}s / {self.cooldown_seconds:.0f}s)"

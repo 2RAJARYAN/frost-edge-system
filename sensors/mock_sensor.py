@@ -23,9 +23,7 @@ class MockSensorReader(SensorReader):
             if not path.exists():
                 raise FileNotFoundError(f"Mock data file not found: {csv_path}")
             with path.open(newline="") as f:
-                self._rows = [
-                    {k: float(v) for k, v in row.items()} for row in csv.DictReader(f)
-                ]
+                self._rows = [{k: float(v) for k, v in row.items()} for row in csv.DictReader(f)]
             if not self._rows:
                 raise ValueError(f"Mock data file is empty: {csv_path}")
 

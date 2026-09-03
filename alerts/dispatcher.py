@@ -27,9 +27,7 @@ def build_channels(config: dict) -> dict[str, AlertChannel]:
             channels[name] = TelegramAlertChannel(tg["bot_token"], tg["chat_id"])
         elif name == "sms":
             sms = config["sms"]
-            channels[name] = SmsAlertChannel(
-                sms["api_key"], sms["api_url"], sms["to_number"]
-            )
+            channels[name] = SmsAlertChannel(sms["api_key"], sms["api_url"], sms["to_number"])
         else:
             raise ValueError(f"Unknown alert channel: {name!r}")
     return channels

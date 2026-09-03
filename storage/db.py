@@ -30,9 +30,7 @@ def init_db(db_path: str | Path = DEFAULT_DB_PATH):
         conn.executescript(schema_path.read_text())
 
 
-def insert_reading(
-    ts: str, key: str, value: float, db_path: str | Path = DEFAULT_DB_PATH
-):
+def insert_reading(ts: str, key: str, value: float, db_path: str | Path = DEFAULT_DB_PATH):
     with get_connection(db_path) as conn:
         conn.execute(
             "INSERT INTO readings (ts, key, value) VALUES (?, ?, ?)",
