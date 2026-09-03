@@ -96,3 +96,15 @@ def latest_prediction(db_path: str | Path = DEFAULT_DB_PATH) -> dict | None:
         "risk_score": risk_score,
         "model_version": model_version,
     }
+
+
+def insert_alert_sent(
+    ts: str, channel: str, risk_score: float, message: str,
+    status: str = "sent", db_path: str | Path = DEFAULT_DB_PATH,
+):
+    with get_connection(db_path) as conn:
+        conn.execute(
+            "INSERT INTO alerts_sent (ts, channel, risk_score, message, status) "
+            "VALUES (?, ?, ?, ?, ?)",
+            (ts, channel, risk_score, message, status),
+        )
