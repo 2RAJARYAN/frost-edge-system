@@ -140,15 +140,6 @@
    cp config/config.example.yaml config/config.yaml
    # Edit config/config.yaml – e.g., change poll_interval_seconds or DB path
 
-   # 5️⃣ Run the three services in separate terminals
-   # Terminal 1 – sensor poller (mock data by default)
-   python -m sensors.poller
-
-   # Terminal 2 – alerts dispatcher
-   python -m alerts.dispatcher
-
-   # Terminal 3 – optional dashboard (http://127.0.0.1:5000/)
-   python -m dashboard.app
 
 ```
 ## Testing
