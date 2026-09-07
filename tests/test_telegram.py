@@ -1,7 +1,5 @@
-import os
-from unittest.mock import patch
-import pytest
 from alerts.dispatcher import build_channels
+
 
 def test_telegram_from_env(monkeypatch):
     # Simulate .env values
