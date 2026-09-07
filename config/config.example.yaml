@@ -17,9 +17,7 @@ alerts:
   cooldown_minutes: 30
   risk_threshold: 0.6
 
-telegram:
-  bot_token: "REPLACE_ME"
-  chat_id: "REPLACE_ME"
+telegram: {}  #<-- present on .env
 
 sms:
   api_key: "REPLACE_ME"
