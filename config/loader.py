@@ -1,10 +1,8 @@
+# for load token form .env
 from pathlib import Path
-import yaml
-#for load token form .env
-import os 
-from pathlib import Path
-from dotenv import load_dotenv
 
+import yaml
+from dotenv import load_dotenv
 
 DEFAULT_CONFIG_PATH = Path(__file__).parent / "config.yaml"
 
@@ -42,14 +40,15 @@ def _validate(config: dict):
             f"got {config['sensor_backend']!r}"
         )
 
+
 def load_env():
     """
     Load .env file loacated to project root.
     """
-    project_root=Path(__file__).resolve().parents[1]  # go up to reporoot
-    dotenv_path=project_root/".env"
+    project_root = Path(__file__).resolve().parents[1]  # go up to reporoot
+    dotenv_path = project_root / ".env"
 
-    if dotenv_path.is_file():   #<--check path points to actual file.
+    if dotenv_path.is_file():  # <--check path points to actual file.
         load_dotenv(dotenv_path)
         print(f".env loaded from {dotenv_path}")
     else:

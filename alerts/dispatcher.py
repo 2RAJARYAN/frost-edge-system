@@ -1,21 +1,19 @@
-import os
 import logging
+import os
 import time
 from datetime import UTC, datetime
-
-#add .env
-from config.loader import load_env
 
 from alerts.alert_policy import AlertPolicy
 from alerts.base import AlertChannel
 from alerts.console_channel import ConsoleAlertChannel
 from alerts.sms_gateway import SmsAlertChannel
 from alerts.telegram_bot import TelegramAlertChannel
-from config.loader import load_config
+
+# add .env
+from config.loader import load_config, load_env
 from storage.db import init_db, insert_alert_sent, latest_prediction
 
-
-load_env()    #this read .env
+load_env()  # this read .env
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("frost-alerts")
@@ -32,14 +30,14 @@ def build_channels(config: dict) -> dict[str, AlertChannel]:
 
         elif name == "telegram":
             # prefer values from config.yaml , fall back to .env
-            tg=config.get("telegram",{})
-            bot_token=tg.get("bot_token") or os.getenv("TELEGRAM_BOT_TOKEN")
-            chat_id=tg.get("chat_id") or os.getenv("TELEGRAM_CHAT_ID")
-            
+            tg = config.get("telegram", {})
+            bot_token = tg.get("bot_token") or os.getenv("TELEGRAM_BOT_TOKEN")
+            chat_id = tg.get("chat_id") or os.getenv("TELEGRAM_CHAT_ID")
+
             if not bot_token or not chat_id:
                 raise ValueError("Telegram channel required bot_token and chat_id ")
-            
-            channels[name]=TelegramAlertChannel(bot_token,chat_id)
+
+            channels[name] = TelegramAlertChannel(bot_token, chat_id)
 
         elif name == "sms":
             sms = config["sms"]
